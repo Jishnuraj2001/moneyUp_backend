@@ -10,6 +10,7 @@ const {budgetRouter}=require("./routes/budget.route");
 const {Oauth}= require("./routes/Aouth");
 const{accountRouter}=require("./routes/account.router");
 const{HomeRouter}=require("./routes/Home.router");
+const{newBudgetRouter}=require("./routes/newBudet.route");
 const app = express();
 
 app.use(express.json());
@@ -17,6 +18,7 @@ app.use(cors());
 app.use("/user", UserRouter);
 
 app.use("/budget",budgetRouter)
+app.use("/newbudget",newBudgetRouter)
 
 app.use("/accounts",accountRouter);
 app.use("/home",HomeRouter);

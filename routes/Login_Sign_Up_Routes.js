@@ -16,9 +16,12 @@ UserRouter.get("/", (req, res) => {
 
 
 UserRouter.post("/register", async (req, res) => {
-
+  
   const { email, name, password, mob_no, dob } = req.body;
-
+  let findEmail=await userModel.findOne({ email });
+ if(findEmail){
+  res.send({ message: "You are aleady registered same emailID" });
+ }else{
   try {
     bcrypt.hash(password, +process.env.sRound, async (err, hash) => {
       
@@ -43,6 +46,7 @@ UserRouter.post("/register", async (req, res) => {
     console.log({ message: error.message });
     res.send({ message: error.message });
   }
+}
 });
 
 
