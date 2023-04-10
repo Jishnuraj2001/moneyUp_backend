@@ -16,6 +16,29 @@ newBudgetRouter.get("/alltask",authenticator,async(req,res)=>{
     }
 })
 
+newBudgetRouter.get("/task/:id",authenticator,async(req,res)=>{
+    try {
+        let taskID=req.params.id
+        let task=await newTaskModel.find({_id:taskID})
+        res.send({"task":task})
+    } catch (error) {
+        console.log(error.message)
+        res.status(401).send({msg:"server error"})
+    }
+})
+
+newBudgetRouter.get("/bank/:id",authenticator,async(req,res)=>{
+    try {
+        let bankID=req.params.id
+        let bank=await Accountmodel.find({_id:bankID})
+        res.send({"bank":bank})
+    } catch (error) {
+        console.log(error.message)
+        res.status(401).send({msg:"server error"})
+    }
+})
+
+
 newBudgetRouter.post('/create',authenticator,async(req,res)=>{
     try {
         req.body.createdDate=get_date()
